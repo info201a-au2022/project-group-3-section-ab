@@ -36,7 +36,6 @@ ca2 <- data2 %>%
   summarize("state" = "california", 
             "avg(Total.Expenditures)" = mean(Total.Expenditures, na.rm=TRUE))
 
-
 ca3 <- data3 %>% 
   filter(state == "California") %>%
   summarize("state" = "california", 
