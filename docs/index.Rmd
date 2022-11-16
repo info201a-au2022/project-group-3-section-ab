@@ -1,7 +1,7 @@
 ---
-title: "Your Project Title"
-author: "project team members"
-date: "1/22/2022"
+title: "An Analysis of Abortion Trends"
+author: "Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)"
+date: "11/16/2022"
 output: html_document
 ---
 
