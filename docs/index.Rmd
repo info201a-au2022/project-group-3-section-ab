@@ -7,12 +7,14 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+source("../source/single_table.R")
 ```
 
-```{r}
-source("../source/single_table.R")
-merged_table
+```{r echo=FALSE}
+kable(merged_table)
 ```
+
 
 ------
 DELETE THIS LATER
