@@ -1,5 +1,5 @@
 ---
-title: "An Analysis of Abortion Trends"
+title: "An Analysis of Abortion Trends in California"
 author: "Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)"
 date: "11/16/2022"
 output: html_document
@@ -11,8 +11,11 @@ library(knitr)
 source("../source/single_table.R")
 ```
 
+### Our table of aggregated data, grouping by the state of California.  
 ```{r echo=FALSE}
-kable(merged_table)
+# split table into two sections for readability
+kable(merged_table[1:5], caption = "Public opinions on abortions in California: proportions in favor of legalizing")
+kable(merged_table[6:10], caption = "Average cost of abortions in California and average driving times to abortion clinics")
 ```
 
 
