@@ -33,15 +33,15 @@ calculate_legal_prop <- function(column,data=NULL){
 ca1 <- data1 %>%
   summarize("state" = "california", 
             !!paste("Do you think abortion should be legal or illegal in cases of rape or incest?", num_people) := 
-              calculate_legal_prop(q11a, data1),
+              as.numeric(calculate_legal_prop(q11a, data1)),
             !!paste0("Do you think abortion should be legal or illegal if the patient's life is endangered?", num_people) := 
-              calculate_legal_prop(q11b, data1),
+              as.numeric(calculate_legal_prop(q11b, data1)),
             !!paste0("Do you think abortion should be legal or illegal if the fetus is not suspected to survive?", num_people) :=  
-              calculate_legal_prop(q11c, data1),
+              as.numeric(calculate_legal_prop(q11c, data1)),
             !!paste0("Do you think abortion should be legal or illegal if the fetus is expected to have serious birth defects?", num_people) :=  
-              calculate_legal_prop(q11d, data1),
+              as.numeric(calculate_legal_prop(q11d, data1)),
             !!paste0("Do you think abortion should be legal or illegal for women who do not wish to be pregnant?", num_people) :=  
-              calculate_legal_prop(q11e, data1))
+              as.numeric(calculate_legal_prop(q11e, data1)))
 
 # ----------
 
@@ -57,7 +57,7 @@ data2 <- data2[data2$County != "Total", ]
 ca2 <- data2 %>% 
   summarize("state" = "california", 
             !!paste0("Avg total expenditures, 2014-2020 (n=", nrow(data2), ")") := 
-              format(round(mean(Total.Expenditures, na.rm=TRUE), 2), nsmall = 2))
+              as.numeric(format(round(mean(Total.Expenditures, na.rm=TRUE), 2), nsmall = 2)))
 
 # ----------
 
@@ -89,19 +89,18 @@ ca3 <- data3 %>%
   filter(state == "California") %>%
   summarize("state" = "california", 
             !!generate_title(8, nrow(filter_ca(gestation_8_duration))) := 
-              calculate_mean(gestation_8_duration, filter_ca(gestation_8_duration)),
+              as.numeric(calculate_mean(gestation_8_duration, filter_ca(gestation_8_duration))),
             !!generate_title(12, nrow(filter_ca(gestation_12_duration))) :=
-              calculate_mean(gestation_12_duration, filter_ca(gestation_12_duration)),
+              as.numeric(calculate_mean(gestation_12_duration, filter_ca(gestation_12_duration))),
             !!generate_title(16, nrow(filter_ca(gestation_16_duration))) := 
-              calculate_mean(gestation_16_duration, filter_ca(gestation_16_duration)),
+              as.numeric(calculate_mean(gestation_16_duration, filter_ca(gestation_16_duration))),
             !!generate_title(20, nrow(filter_ca(gestation_20_duration))) :=  
-              calculate_mean(gestation_20_duration, filter_ca(gestation_20_duration)))
+              as.numeric(calculate_mean(gestation_20_duration, filter_ca(gestation_20_duration))))
 
-
-# ----------
-
-# merge all tables on state=="california"
 merged_table <- ca1 %>%
   left_join(ca2, by='state') %>%
   left_join(ca3, by='state') %>%
   subset(select = -c(state))
+
+summary_info <- transpose(as.list(merged_table))
+summary_info <- summary_info[1]
