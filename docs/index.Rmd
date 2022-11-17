@@ -52,6 +52,9 @@ Most of the California residents would alter in some way the level of accessibil
 ### Dataset 2: Abortion-Related Services Funded by Medi-Cal (2014-2020, Medi-Cal)
  
 !["Abortion Related Serviced Funded by Medi Cal 2014-2020"](../docs/dataset2.jpg)
+
+I included this scatter plot to display the overall changing trends in spending for abortion related services in the state of california. The information reveals that the total amount of funds are actually going down, as noted with the close to $20,000,000 in 2014 compared to 2020 where it was lower towards $15,000,0000. It is interesting to see this change, as one would think that funds would have risen, but instead it has dropped, at least in the state of california. 
+The scatter plot graph has labels with the top half of the data being the overall total for counties, whereas the middle reveals the spending of the country of Los Angeles, which interestingly has been the county with the most funding. 
  
 ---
  
