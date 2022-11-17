@@ -6,17 +6,54 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 library(knitr)
-source("../source/single_table.R")
 ```
+
+
+## Summary Information
+
+
 
 ### Our table of aggregated data, grouping by the state of California.  
 ```{r echo=FALSE}
+source("../source/single_table.R")
 # split table into two sections for readability
 kable(merged_table[1:5], caption = "Public opinions on abortions in California: proportions in favor of legalizing")
 kable(merged_table[6:10], caption = "Average cost of abortions in California and average driving times to abortion clinics")
 ```
+include a brief paragraph, describing why you included the table, and what information it reveals.
+
+
+---
+
+### Dataset 1: Abortion Knowledge and Attitudes Poll (Kaiser Family Foundation)
+```{r echo=FALSE, fig.width=8, fig.height=4, fig.cap="Source: Henry J. Kaiser Family Foundation for Roper Center at Cornell University"}
+source("../source/dataset3_graph.R")
+
+```
+
+
+
+---
+
+### Dataset 2: Abortion-Related Services Funded by Medi-Cal, years 2014 to 2020 (Medi-Cal)
+```{r echo=FALSE, fig.width=8, fig.height=4, fig.cap="Source: Medi-Cal and California’s Department of Health Care Services (DHCS)"}
+source("../source/dataset3_graph.R")
+
+```
+ 
+ 
+ 
+---
+ 
+### Dataset 3: Driving Times to Abortion Clinics in the US (The Pudding)
+```{r echo=FALSE, fig.width=8, fig.height=4, fig.cap="Source: The Pudding (MIT)"}
+source("../source/dataset3_graph.R")
+line_graph
+```
+describing why you included the chart and what information it reveals, including notable observations and insights from the chart.
+
 
 
 ------
