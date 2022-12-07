@@ -1,45 +1,55 @@
 # Load libraries so they are available
 library("shiny")
+library("plotly")
 
-# We'll begin by defining some of the UI elements as variables
-# This helps keep the code organized and easier to debug
 
-# Define a variable `intro_panel` for your first page. It should be a
-# `tabPanel()` with a title "Introduction" to represent the first tab.
-# This layout will contain the following elements:
+# Introduction
+
+intro_content <- mainPanel(
+  p(strong("Kayla Ann Gibbs, Kristy Nhan, Elizabeth Luna-Santos")),
+  p(strong("Fall 2022 INFO 201 Project")),
+  p(),
+  p("This project is focused on analyzing abortion trends, specifically in 
+    California. As abortion access is a very relevant and ongoing issue 
+    that impacts those who can give birth, it is important to see the closer 
+    details and specific obstacles or reasons why abortion is perceived the way 
+    it is."),
+  p("The problem domain is that of a financial, economic, as well as social 
+    perspective for abortion. Many of which are intertwined and also often do 
+    not make much sense. Especially when it comes to abortion, in which the 
+    ability to get abortion is often limited based on the weeks of gestation 
+    where it might be too early to test for the hCG hormone."), 
+  p("The research questions our group sought to research are:"),
+  tags$li("How has legalizing and prohibiting abortions in the United States 
+          affected public opinion on abortions in California?"),
+  tags$li("How have opinions on abortions changed over the last three years in 
+          California?"), 
+  tags$li("How has the funding for abortions changed over the last three years 
+          in California?"),
+  tags$li("What are some financial roadblocks that impact the accessibility 
+          of abortion in California, and what are people doing to get around 
+          them?"),
+  p(),
+  p("The data that was analyzed, is that of public opinion on abortion of 
+  Californian interviewees; abortion related serviced funded by Medi-Cal, 
+  California's Medicaid program serving low-income individuals, including 
+  families, seniors, persons with disabilities, pregnant women, and childless 
+  adults with incomes below 138% of federal poverty level; as well as the 
+  driving times to abortion clinics in California cities."),
+  p("Some key findings were that public opinions on abortion in the state of 
+    California was more liberal and more likely to want to legalize abortion. In 
+    addition, there was a large amount of funding dedicated to abortion,
+    especially in counties such as Los Angeles County, where it was more likely 
+    to be funded by Medi-Cal. Lastly, there were less driving times present as 
+    shown in our third dataset, due to the availability of abortion clinics 
+    in close proximities within California, which has been an established 
+    progressive state.")
+)
+
 intro_panel <- tabPanel(
-  "Introduction",
-  
-  # A `titlePanel()` with the text "An Analysis of Abortion Trends in California"
-  # titlePanel("An Analysis of Abortion Trends in California"),
-  includeHTML('docs/index.html'),
-  
-  # A paragraph `p()` describing with the text: "The below diagram was created
-  # by the New York Times to illustrate the increasing level of inequality in
-  # the US."
-  # p("The below diagram was created by the New York Times to illustrate the
-  #   increasing level of inequality in the US."),
-  # 
-  # # An image `img()` to display. This content should have a `src` attribute of
-  # # "inequality.png" (which will refer to the file in the `www/` folder).
-  # img(src = "inequality.png"),
-  # 
-  # # A paragraph containing a hyperlink `a()` to the source of the article at
-  # # https://www.nytimes.com/interactive/2017/08/07/opinion/leonhardt-income-inequality.html
-  # p(a(href = "https://www.nytimes.com/interactive/2017/08/07/opinion/leonhardt-income-inequality.html", "(source)")),
-  # 
-  # # A paragraph containing a 1-2 sentence description of what the diagram
-  # # shows. Your paragraph should include both `strong()` and emphasized `em()`
-  # # text.
-  # p(
-  #   "The graph shows how the richest 1% of people have seen their incomes jump",
-  #   strong("6%"),
-  #   "since 1980",
-  #   "while the bottom 60% have barely seen any increase",
-  #   em("(their income has stagnated).")
-  # ),
-  # 
-  # p('Click on the "Growth Chart" tab to see an interactive diagram.')
+  "Overview",
+  titlePanel("Introduction"),
+  intro_content
 )
 
 # Next, we'll define a few UI elements to render in our second panel
@@ -145,6 +155,48 @@ driving_access_panel <- tabPanel(
   )
 )
 
+summary_content <- mainPanel(
+  p("Our data works with points about public opinion of abortions, cost of 
+    abortions, and driving times to abortion clinics in California state."),
+  p("From the first five columns, the table reveals that over 62% of Californian 
+    survey participants consistently agree that abortions should be legalized 
+    under various conditions. This observation affirms our own opinions on 
+    California’s liberal views that make them more likely to agree to 
+    legalizing abortions."),
+  p("The sixth column took the average of all total expenditures on abortions 
+    and abortion-related procedures per county in California, and this result 
+    came out to $293408.25. We acknowledge that California is a large state 
+    with many large cities and also many rural cities, which was shown in our 
+    original dataset with millions of dollars from major counties like Los 
+    Angeles County, whereas abortions and abortion-related services were only a 
+    few hundred dollars in the smaller, rural counties like Sierra County."),
+  p("The last four columns in our table describe one’s average driving time (in 
+    minutes) to the nearest abortion clinic in California, based on what week 
+    of pregnancy they decided to abort at (8, 12, 16, 20). These numbers came 
+    out to be very small (all around 1 minute: 1, 1, 1.13, and 1.26, 
+    respectively), and we believe this is because there is an abundance of 
+    clinics in California that are more easily accessible to serve more of the 
+    state’s extremely large population. Though small, there was a positive 
+    trend in the driving time as one’s pregnancy progressed until they decided 
+    to get an abortion. We believe this is because it becomes increasingly 
+    more difficult to perform abortions later in the pregnancy, and not all 
+    clinics would have the capacity or skill to handle those abortions, so 
+    people would have to drive farther out to find an abortion clinic that 
+    serves them."),
+  p(),
+  img(src="aggregated_data.png"),
+  p(em("Our table of aggregated data, grouping by the state of California.")),
+  p(),
+  p("Our three key takeaways:"),
+  tags$li("People are more likely to be able to have access to an abortion 
+          clinic as many are in close proximity to each other due to a large population 
+          and cities (mostly liberal) which are able to provide these services."),
+  tags$li("A majority of 62% of Californians are in support of legalizing 
+          abortion under any circumstances."),
+  tags$li("Driving times to an abortion clinic is an average of about 
+          1 minute, which demonstrates the accessibility of abortion services.")
+)
+
 summary_panel <- tabPanel(
   "Summary",
   
@@ -153,13 +205,17 @@ summary_panel <- tabPanel(
   
   # A `sidebarLayout()` to create two columns.
   # The sidebar layout will contain elements:
-  sidebarLayout(
-    # Your `sidebar_content`
-    sidebar_content,
-    
-    # Your `main_content`
-    main_content
-  )
+  summary_content
+)
+
+# Report
+report_insert <- mainPanel(
+  includeHTML("docs/index.html")
+)
+
+report_panel <- tabPanel(
+  "Project Report",
+  report_insert
 )
 
 # Finally, define a `ui` variable, assigning it a `navbarPage()` layout.
@@ -169,12 +225,24 @@ summary_panel <- tabPanel(
 # - Your `intro_panel`
 # - Your `growth_panel`
 
-ui <- navbarPage(
-  "An Analysis of Abortion Trends in California",
-  theme = shinythemes::shinytheme("readable"),
-  intro_panel,
-  public_opinion_panel,
-  funding_panel,
-  driving_access_panel,
-  summary_panel
+# ui <- navbarPage(
+#   "An Analysis of Abortion Trends in California",
+#   theme = shinythemes::shinytheme("readable"),
+#   intro_panel,
+#   public_opinion_panel,
+#   funding_panel,
+#   driving_access_panel,
+#   summary_panel
+# )
+ui <- fluidPage(
+  navbarPage(
+    "An Analysis of Abortion Trends",
+    theme = shinythemes::shinytheme("readable"),
+    intro_panel,
+    public_opinion_panel, 
+    funding_panel,
+    driving_access_panel, 
+    summary_panel,
+    report_panel
+  )
 )
