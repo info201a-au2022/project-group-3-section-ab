@@ -1,0 +1,49 @@
+* {
+  font-family: 'Avenir';
+}
+
+body {
+  font-size: 16px;
+  padding-bottom: 16px;
+}
+
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+  width: 100%;
+}
+
+.col-sm-8 {
+  padding-left: 0px;
+  width: 100%;
+}
+
+.img-size {
+  width: 75%;
+}
+
+.caption {
+  font-size: 12px;
+}
+
+.navbar-header{
+  padding-left: 20px;
+}
+
+.inner-content {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.navbar {
+  background-color: #f3969a;
+  -webkit-text-fill-color: white;
+  border: 0px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+  background-color: #edafb3;
+  font-weight: bold;
+  color: white;
+}
+

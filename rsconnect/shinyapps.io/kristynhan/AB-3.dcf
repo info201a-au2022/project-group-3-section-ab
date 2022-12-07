@@ -5,9 +5,9 @@ account: kristynhan
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 7819779
-bundleId: 6601658
+bundleId: 6601803
 url: https://kristynhan.shinyapps.io/AB-3/
-when: 1670372104.38409
-lastSyncTime: 1670372104.3841
+when: 1670374580.3344
+lastSyncTime: 1670374580.33441
 asMultiple: FALSE
 asStatic: FALSE

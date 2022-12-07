@@ -5,10 +5,11 @@ library("plotly")
 
 # Introduction
 
-intro_content <- mainPanel(
-  p(strong("Kayla Ann Gibbs, Kristy Nhan, Elizabeth Luna-Santos")),
-  p(strong("Fall 2022 INFO 201 Project")),
-  p(),
+intro_content <- mainPanel( 
+  p(h4("Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)")),
+  p(h4("Fall 2022 INFO 201 Project")),
+  p(tags$br()),
+  p(strong(h3("Introduction"))),
   p("This project is focused on analyzing abortion trends, specifically in 
     California. As abortion access is a very relevant and ongoing issue 
     that impacts those who can give birth, it is important to see the closer 
@@ -19,18 +20,16 @@ intro_content <- mainPanel(
     not make much sense. Especially when it comes to abortion, in which the 
     ability to get abortion is often limited based on the weeks of gestation 
     where it might be too early to test for the hCG hormone."), 
-  p("The research questions our group sought to research are:"),
+  p("Our group sought to research the following questions::"),
   tags$li("How has legalizing and prohibiting abortions in the United States 
           affected public opinion on abortions in California?"),
-  tags$li("How have opinions on abortions changed over the last three years in 
-          California?"), 
   tags$li("How has the funding for abortions changed over the last three years 
           in California?"),
   tags$li("What are some financial roadblocks that impact the accessibility 
           of abortion in California, and what are people doing to get around 
           them?"),
   p(),
-  p("The data that was analyzed, is that of public opinion on abortion of 
+  p("The data that was analyzed is that of public opinion on abortion of 
   Californian interviewees; abortion related serviced funded by Medi-Cal, 
   California's Medicaid program serving low-income individuals, including 
   families, seniors, persons with disabilities, pregnant women, and childless 
@@ -47,8 +46,8 @@ intro_content <- mainPanel(
 )
 
 intro_panel <- tabPanel(
+  class = "inner-content",
   "Overview",
-  titlePanel("Introduction"),
   intro_content
 )
 
@@ -105,6 +104,7 @@ growth_panel <- tabPanel(
 )
 
 public_opinion_panel <- tabPanel(
+  class = "inner-content",
   "Public Opinion",
   
   # A `titlePanel()` with the text "Income growth 1980-2014"
@@ -122,6 +122,7 @@ public_opinion_panel <- tabPanel(
 )
 
 funding_panel <- tabPanel(
+  class = "inner-content",
   "Funding",
   
   # A `titlePanel()` with the text "Income growth 1980-2014"
@@ -139,6 +140,7 @@ funding_panel <- tabPanel(
 )
 
 driving_access_panel <- tabPanel(
+  class = "inner-content",
   "Access to Clinics",
   
   # A `titlePanel()` with the text "Income growth 1980-2014"
@@ -158,6 +160,10 @@ driving_access_panel <- tabPanel(
 summary_content <- mainPanel(
   p("Our data works with points about public opinion of abortions, cost of 
     abortions, and driving times to abortion clinics in California state."),
+  p(tags$br()),
+  img(src="aggregated_data.png", class = "img-size"),
+  p(em("Our table of aggregated data, grouping by the state of California."), class = "caption"),
+  p(tags$br()),
   p("From the first five columns, the table reveals that over 62% of Californian 
     survey participants consistently agree that abortions should be legalized 
     under various conditions. This observation affirms our own opinions on 
@@ -183,25 +189,23 @@ summary_content <- mainPanel(
     clinics would have the capacity or skill to handle those abortions, so 
     people would have to drive farther out to find an abortion clinic that 
     serves them."),
-  p(),
-  img(src="aggregated_data.png"),
-  p(em("Our table of aggregated data, grouping by the state of California.")),
-  p(),
-  p("Our three key takeaways:"),
+  p(tags$br()),
+  p(strong("Our three key takeaways:")),
   tags$li("People are more likely to be able to have access to an abortion 
           clinic as many are in close proximity to each other due to a large population 
           and cities (mostly liberal) which are able to provide these services."),
   tags$li("A majority of 62% of Californians are in support of legalizing 
           abortion under any circumstances."),
-  tags$li("Driving times to an abortion clinic is an average of about 
+  tags$li("Driving times to an abortion clinic in California is an average of about 
           1 minute, which demonstrates the accessibility of abortion services.")
 )
 
 summary_panel <- tabPanel(
+  class = "inner-content",
   "Summary",
   
   # A `titlePanel()` with the text "Income growth 1980-2014"
-  titlePanel("Summary & Key Takeaways"),
+  titlePanel("Summary"),
   
   # A `sidebarLayout()` to create two columns.
   # The sidebar layout will contain elements:
@@ -237,12 +241,13 @@ report_panel <- tabPanel(
 ui <- fluidPage(
   navbarPage(
     "An Analysis of Abortion Trends",
-    theme = shinythemes::shinytheme("readable"),
+    # theme = shinythemes::shinytheme("minty"),
     intro_panel,
     public_opinion_panel, 
     funding_panel,
     driving_access_panel, 
     summary_panel,
     report_panel
-  )
+  ),
+  includeCSS("styles.css")
 )
