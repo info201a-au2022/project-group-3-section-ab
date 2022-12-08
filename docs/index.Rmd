@@ -1,5 +1,5 @@
 ---
-title: "An Analysis of Abortion Trends in California"
+title: "Project Report: An Analysis of Abortion Trends in California"
 author: "Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)"
 date: "Fall 2022"
 output: html_document
