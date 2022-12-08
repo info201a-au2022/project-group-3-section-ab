@@ -3,9 +3,9 @@
 }
 
 body {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 3px;
-  padding-bottom: 16px;
+  padding-bottom: 20px;
 }
 
 .container-fluid {
@@ -16,7 +16,7 @@ body {
 
 .col-sm-8 {
   padding-left: 0px;
-  width: 100%;
+  
 }
 
 .img-size {
@@ -55,4 +55,8 @@ body {
 .shiny-input-container:not(.shiny-input-container-inline) {
   width: inherit;
   padding-top: 15px;
+}
+
+.display-question {
+  width: 100%;
 }

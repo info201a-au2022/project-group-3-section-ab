@@ -66,7 +66,7 @@ intro_panel <- tabPanel(
 
 # Define a variable `main_content` as a `mainPanel()` UI element
 # containing the following information:
-# main_content <- mainPanel(
+main_content <- mainPanel(
 #   # A `plotOutput()` element showing the 'plot' output (defined in the server)
 #   plotOutput("plot"),
 #   
@@ -79,7 +79,7 @@ intro_panel <- tabPanel(
 #       "http://gabriel-zucman.eu/usdina/"
 #     )
 #   )
-# )
+)
 
 
 # Define a variable `growth_panel` for your second page. It should be a
@@ -102,7 +102,10 @@ intro_panel <- tabPanel(
 #   )
 # )
 
-chart1_main_content <- mainPanel(
+
+# Dataset 1: Public Opinions in the US
+
+public_opinion_content <- mainPanel(
   class = "display-question",
   selectInput(
     "question",
@@ -113,40 +116,79 @@ chart1_main_content <- mainPanel(
       "Do you think abortion should be legal or illegal if the fetus is not suspected to survive?" = "q11c",
       "Do you think abortion should be legal or illegal if the fetus is expected to have serious birth defects?" = "q11d",
       "Do you think abortion should be legal or illegal for women who do not wish to be pregnant?" = "q11e"
-    )
+    ),
+    selected = "q11a"
   ),
-  plotOutput("plot"),
+  plotlyOutput("plot"),
   p(em("Source: Henry J. Kaiser Family Foundation for Roper Center at Cornell 
-       University\nThese graphs display the percentage of people surveyed in 
-       each state who think that abortion should be legalized in the context 
-       of the selected question. Survey participants were allowed to skip 
-       questions as they liked, so some states may show 0, which means that 
-       data was not recorded for that particular U.S. state."),
-    align = "center", style = "font-size:12px;")
+       University"), align = "right", style = "font-size:14px;"),
+  p("These graphs display the percentage of people surveyed in 
+     each state who think that abortion should be legalized in the context 
+     of the selected question. Survey participants were allowed to skip 
+     questions as they liked, so some states may show 0, which means that 
+     data was not recorded for that particular U.S. state."),
+  p("These graphs tell us what the general public's opinions are, given
+    different situations in which someone may choose to have an abortion. We
+    can use this data to determine the viewpoints of U.S. citizens right as
+    the 2020 elections went into full swing in a fierce battle between liberal
+    and conservative viewpoints and the transition of power. ")
 )
 
 public_opinion_panel <- tabPanel(
   "Public Opinions",
-  titlePanel("Public Opinions on Abortion"),
-  chart1_main_content
+  titlePanel("Public Opinions on Abortion in the U.S."),
+  public_opinion_content
+)
+
+
+# Dataset 2: Funding for abortion-related services
+
+funding_sidebar <- sidebarPanel(
+  sliderInput(
+    inputId = "year",
+    label = "Year Range",
+    min = 2014, max = 2020,
+    value = c(2014, 2020),
+    round = TRUE
+  ),
+  selectInput(
+    inputId = "ages",
+    label = "Select an age range:",
+    choices = list(
+      "Under 15" = "Under 15",
+      "15 - 19" = "15 - 19",
+      "20 - 24" = "20 - 24",
+      "25 - 29" = "25 - 29",
+      "30 - 34" = "30 - 34",
+      "35 - 39" = "35 - 39", 
+      "40 - 44" = "40 - 44",
+      "45 & Up" = "45 & Up"), 
+    selected = "Under 15"
+  )
+)
+
+funding_content <- mainPanel(
+  plotlyOutput("line"),
+  p(em("Source: California Human Health and Services Agency"),
+    align = "right", style = "font-size:14px;"),
+  p("These graphs display the number of people among each listed race and within
+    certain age ranges who received financial help from Medi-Cal for
+    abortion-related services in the state of California over the years
+    2014-2020."),
+  p("With this data, we can observe the overall trend in how the number of
+    people who are able to receive financial aid has changed over the course
+    of 2014-2020, and distinguish how this aid has been distributed among
+    different races and ethnicities.")
 )
 
 funding_panel <- tabPanel(
   class = "inner-content",
   "Funding",
-  
-  # A `titlePanel()` with the text "Income growth 1980-2014"
-  titlePanel("Funding for Abortion-Related Services in California"),
-  
-  # A `sidebarLayout()` to create two columns.
-  # The sidebar layout will contain elements:
-  # sidebarLayout(
-  #   # Your `sidebar_content`
-  #   sidebar_content,
-  #   
-  #   # Your `main_content`
-  #   main_content
-  # )
+  titlePanel("Number of People to Receive Funding for Abortion-Related Services in California"),
+  sidebarLayout(
+    funding_sidebar,
+    funding_content
+  )
 )
 
 driving_access_panel <- tabPanel(
@@ -218,26 +260,26 @@ summary_panel <- tabPanel(
 )
 
 # Report
-report_insert <- mainPanel(
-  includeHTML("docs/index.html")
-)
-
-report_panel <- tabPanel(
-  "Project Report",
-  report_insert
-)
+# report_insert <- mainPanel(
+#   includeHTML("docs/index.html")
+# )
+# 
+# report_panel <- tabPanel(
+#   "Project Report",
+#   report_insert
+# )
 
 
 # Include motivation
 
-motivation_insert <- mainPanel(
-  includeMarkdown("docs/p01-proposal.md")
-)
-
-motivation_panel <- tabPanel(
-  "Motivation",
-  motivation_insert
-)
+# motivation_insert <- mainPanel(
+#   includeMarkdown("docs/p01-proposal.md")
+# )
+# 
+# motivation_panel <- tabPanel(
+#   "Motivation",
+#   motivation_insert
+# )
 
 # Finally, define a `ui` variable, assigning it a `navbarPage()` layout.
 # You will use `shinyUI()` to render this variable (in `app.R`)
@@ -255,8 +297,8 @@ ui <- fluidPage(
     funding_panel,
     driving_access_panel, 
     summary_panel,
-    report_panel, 
-    motivation_panel
+    # report_panel, 
+    # motivation_panel
   ),
   includeCSS("styles.css")
 )
