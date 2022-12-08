@@ -50,58 +50,6 @@ intro_panel <- tabPanel(
   intro_content
 )
 
-# Next, we'll define a few UI elements to render in our second panel
-
-# Define a variable `sidebar_content` as a `sidebarPanel()` UI element
-# containing the following information:
-
-# sidebar_content <- sidebarPanel(
-#   # A `sliderInput()` for the 'percentile' value, labeled "Income Percentile".
-#   # This slider should let the user pick a range between 0 and 100
-#   sliderInput(
-#     inputId = "percentile",
-#     label = "Income Percentile", min = 0, max = 100, value = c(0, 100)
-#   )
-# )
-
-# Define a variable `main_content` as a `mainPanel()` UI element
-# containing the following information:
-main_content <- mainPanel(
-#   # A `plotOutput()` element showing the 'plot' output (defined in the server)
-#   plotOutput("plot"),
-#   
-#   # A paragraph with a hyperlink to the data source
-#   # http://gabriel-zucman.eu/usdina/
-#   p(
-#     "Source:",
-#     a(
-#       href = "http://gabriel-zucman.eu/usdina/",
-#       "http://gabriel-zucman.eu/usdina/"
-#     )
-#   )
-)
-
-
-# Define a variable `growth_panel` for your second page. It should be a
-# `tabPanel()` with a title "Growth Chart" to represent the second tab.
-# This layout will contain the following elements:
-# growth_panel <- tabPanel(
-#   "Growth Chart",
-#   
-#   # A `titlePanel()` with the text "Income growth 1980-2014"
-#   titlePanel("Income growth 1980-2014"),
-#   
-#   # A `sidebarLayout()` to create two columns.
-#   # The sidebar layout will contain elements:
-#   sidebarLayout(
-#     # Your `sidebar_content`
-#     sidebar_content,
-#     
-#     # Your `main_content`
-#     main_content
-#   )
-# )
-
 
 # Dataset 1: Public Opinions in the US
 
@@ -269,7 +217,9 @@ summary_content <- mainPanel(
   tags$li("A majority of 62% of Californians are in support of legalizing 
           abortion under any circumstances."),
   tags$li("Driving times to an abortion clinic in California is an average of about 
-          1 minute, which demonstrates the accessibility of abortion services.")
+          1 minute, which demonstrates the accessibility of abortion services."),
+  p(tags$br()),
+  p(strong("Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)"))
 )
 
 summary_panel <- tabPanel(
@@ -279,34 +229,6 @@ summary_panel <- tabPanel(
   summary_content
 )
 
-# Report
-# report_insert <- mainPanel(
-#   includeHTML("docs/index.html")
-# )
-# 
-# report_panel <- tabPanel(
-#   "Project Report",
-#   report_insert
-# )
-
-
-# Include motivation
-
-# motivation_insert <- mainPanel(
-#   includeMarkdown("docs/p01-proposal.md")
-# )
-# 
-# motivation_panel <- tabPanel(
-#   "Motivation",
-#   motivation_insert
-# )
-
-# Finally, define a `ui` variable, assigning it a `navbarPage()` layout.
-# You will use `shinyUI()` to render this variable (in `app.R`)
-# Give the layout a title of "Income Inequality".
-# The layout should include the following elements:
-# - Your `intro_panel`
-# - Your `growth_panel`
 
 ui <- fluidPage(
   navbarPage(
@@ -316,9 +238,7 @@ ui <- fluidPage(
     public_opinion_panel, 
     funding_panel,
     driving_panel, 
-    summary_panel,
-    # report_panel, 
-    # motivation_panel
+    summary_panel
   ),
   includeCSS("styles.css")
 )

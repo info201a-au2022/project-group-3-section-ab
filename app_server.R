@@ -9,30 +9,6 @@ library("plotly")
 # DATASET 1
 
 opinions <- read.csv("./data/opinions.csv")
-# opinions_csv <- read.csv("./data/Abortion Knowledge and Attitudes Poll.csv")
-# 
-# # Filter data: we want to summarize the count for our 4 main questions
-# #   for each state and remove unnecessary columns
-# opinions <- opinions_csv %>%
-#   select("state", "q11a", "q11b", "q11c", "q11d", "q11e")
-# 
-# # remove empty rows
-# opinions <- opinions[!opinions$q11a==" ",]
-# 
-# # get proportions and percentages
-# opinions <- opinions %>%
-#   group_by(state) %>%
-#   summarise(
-#     "Total participants" = n(),
-#     across(q11a, (~ sum(. == "Legal") * 100 / `Total participants`)),
-#     across(q11b, (~ sum(. == "Legal") * 100 / `Total participants`)),
-#     across(q11c, (~ sum(. == "Legal") * 100 / `Total participants`)),
-#     across(q11d, (~ sum(. == "Legal") * 100 / `Total participants`)),
-#     across(q11e, (~ sum(. == "Legal") * 100 / `Total participants`)))
-# 
-# # change state (all caps) to state abbreviations
-# opinions$state <- str_to_title(opinions$state)
-# opinions$state <- state.abb[match(opinions$state, state.name)]
 
 # create the bar graph
 bar_1 <- function(question.var) {
@@ -152,9 +128,6 @@ line_1 <- function(ages.var, year1, year2) {
 # DATASET 3
 driving <- read.csv("./data/Driving Times to Abortion Clinics in the US.csv")
 
-# find the average amount of time it takes someone in California to get
-# to the closest abortion clinic
-
 double_bar <- function(state.choice) {
   # filter driving to state of choice
   driving_filtered <- function(column, data = driving) {
@@ -231,66 +204,23 @@ double_bar <- function(state.choice) {
     )
   )
   
-  # line_graph
-  # add first data: solid line
   graph <- ggplot(df, aes(x = weeks_in_pregnancy,
                                y = avg_driving_times, group = supp)) +
     geom_bar(stat = "identity", position = position_dodge(),
              alpha = 0.75, aes(fill=supp), na.rm = TRUE) + 
     scale_color_manual(guide = guide_legend(title="Nearby abortion clinics")) +
-    # geom_line(aes(linetype = supp)) +
-    # geom_point()
-  
-  # # add second data: dashed line
-  # line_graph <- line_graph +
-  #   geom_line(aes(linetype = supp)) +
-  #   geom_point() +
-    labs(
-      x = "Length of pregnancy before abortion (weeks)", y = "Time (min)",
+    labs(x = "Length of pregnancy before abortion (weeks)", y = "Time (min)",
       fill = "Nearby abortion clinics") +
     ggtitle("Average driving time to abortion clinics in U.S. states,\nbased on duration of pregnancy in weeks") +
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_x_continuous(breaks = seq(8, 20, by = 4)) +
     scale_y_continuous(limits = c(0, 1.5))
   graph
+}
   
-  
-  
-  
-  
-  
-  # graph <- ggplot(data = results, aes(x = num_weeks, y = Freq, fill = Player)) +
-  #   geom_bar(stat = "identity", position = position_dodge(), alpha = 0.75)  +
-  #   ylim(0,800) +
-  #   geom_text(aes(label = Freq), fontface = "bold", vjust = 1.5,
-  #             position = position_dodge(.9), size = 4) +
-  #   labs(x = "\n Coin Flip Outcome", y = "Frequency\n", title = "\n Coin Flip Results \n") +
-  #   theme(plot.title = element_text(hjust = 0.5), 
-  #         axis.title.x = element_text(face="bold", colour="red", size = 12),
-  #         axis.title.y = element_text(face="bold", colour="red", size = 12),
-  #         legend.title = element_text(face="bold", size = 10))
-  # 
-  
-
-  }
-
-
-
 
 # Define a server function
 server <- function(input, output) {
-  # output$plot <- renderPlot({
-  #   # return the plot
-  #   ggplot(data = income_growth) +
-  #     geom_point(mapping = aes(
-  #       x = Income.Percentile, y = Average.Growth.Perc
-  #     ), color = "gray") +
-  #     geom_point(mapping = aes(
-  #       x = Income.Percentile, y = Post.Tax.Growth.Perc
-  #     ), color = "red") +
-  #     labs(x = "Income Percentile", y = "Income Growth (%)") +
-  #     scale_x_continuous(limits = input$percentile)
-  # })
   output$plot <- renderPlotly({
     return(bar_1(input$question) + theme(legend.position="none"))
   })
