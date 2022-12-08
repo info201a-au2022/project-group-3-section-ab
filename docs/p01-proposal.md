@@ -1,4 +1,4 @@
-# Project Proposal: An Analysis of Abortion Trends
+# An Analysis of Abortion Trends
 ### INFO-201: Technical Foundations of Informatics - The Information School - University of Washington
 #### Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)
 #### Codename: Rocketship
@@ -30,9 +30,8 @@ If intervention is done with data and technology, the benefits are there’s mor
 ## Research Questions
 Abortion in the United States of America has been an alternative, last-step method for pregnancy intervention and prevention for the last 50 years. However, in recent times the case ruling that made this possible, ‘Roe v. Wade,’ was overturned in June 2022, effectively removing the federal right to have access to an abortion procedure. Both before and after the legalization of abortion, due to many reasons such as conflicting socioenvironmental beliefs, lack of access to medical/surgical services, lack of financial resources, or fear of judgment - people have sought out dangerous, non-scientifically backed, alternative abortion solutions. Thus, we seek to research the following questions:
 1. How has legalizing and prohibiting abortions in the United States affected public opinion on abortions?
-2. How have opinions on abortions changed over the last three years in the United States?
-3. How has the funding for abortions changed over the last three years in the United States?
-4. What are some financial roadblocks that impact the accessibility of abortion, and what are people doing to get around them?
+2. How has funding for abortions impacted abortion-related services in California?
+3. What are some financial roadblocks that impact the accessibility of abortion in California, and what are people doing to get around them?
 
 
 ## Datasets
