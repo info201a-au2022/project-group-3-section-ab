@@ -191,22 +191,42 @@ funding_panel <- tabPanel(
   )
 )
 
-driving_access_panel <- tabPanel(
+
+# Dataset 3
+
+driving_sidebar <- sidebarPanel(
+  selectInput("state", "Select a state",
+              choices = list(
+                state.name = state.name),
+              selected = "California")
+)
+
+driving_content <- mainPanel(
+  plotOutput("doubleBar"),
+  p(em("Source: The Pudding (MIT)"),
+    align = "right", style = "font-size:14px;"),
+  p(),
+  p("These graphs show the average amount of time in minutes that it takes for
+    someone to travel to an abortion clinic in any given 2017 U.S. state,
+    depending on the stage of pregnancy that the carrier is in. Unfortunately,
+    the dataset was lacking points from many states, but from the states that
+    provided data, we can perform thorough analysis on. (ex. California,
+    Connecticut, Illinois, Massachusetts, Maryland, to name a few)"),
+  p("With this data, we can make note of which states provide equitable and
+    accessible abortion-related healthcare within reasonable range. From the
+    aforementioned states, it looks like travel time to abortion clinics is
+    very minimal, but we can't say for sure that the results are the same for
+    the states we don't have sufficient data on.")
+)
+
+driving_panel <- tabPanel(
   class = "inner-content",
   "Access to Clinics",
-  
-  # A `titlePanel()` with the text "Income growth 1980-2014"
-  titlePanel("Driving Times to Abortion Clinics in California"),
-  
-  # A `sidebarLayout()` to create two columns.
-  # The sidebar layout will contain elements:
-  # sidebarLayout(
-  #   # Your `sidebar_content`
-  #   sidebar_content,
-  #   
-  #   # Your `main_content`
-  #   main_content
-  # )
+  titlePanel("Driving Times to Abortion Clinics in each U.S. State"),
+  sidebarLayout(
+    driving_sidebar,
+    driving_content
+  )
 )
 
 summary_content <- mainPanel(
@@ -295,7 +315,7 @@ ui <- fluidPage(
     intro_panel,
     public_opinion_panel, 
     funding_panel,
-    driving_access_panel, 
+    driving_panel, 
     summary_panel,
     # report_panel, 
     # motivation_panel
