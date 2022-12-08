@@ -8,9 +8,6 @@ library("tidyverse")
 # Introduction
 
 intro_content <- mainPanel( 
-  p(h4("Kayla Gibbs, Kristy Nhan, Elizabeth Luna-Santos")),
-  p(h4("Autumn 2022 INFO 201 Project")),
-  p(tags$br()),
   p(strong(h3("Introduction"))),
   p("This project is focused on analyzing abortion trends, specifically in 
     California. As abortion access is a very relevant and ongoing issue 
@@ -23,7 +20,7 @@ intro_content <- mainPanel(
     ability to get abortion is often limited based on the weeks of gestation 
     where it might be too early to test for the hCG hormone."), 
   p("Our group sought to research the following questions::"),
-  tags$li("ow has legalizing and prohibiting abortions in the United States 
+  tags$li("How has legalizing and prohibiting abortions in the United States 
           affected public opinion on abortions?"),
   tags$li("How has funding for abortions impacted abortion-related services in 
           California?"),

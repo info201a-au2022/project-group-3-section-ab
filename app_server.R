@@ -6,7 +6,7 @@ library("tidyverse")
 
 # DATASET 1
 
-opinions_csv <- read.csv("data/Abortion Knowledge and Attitudes Poll.csv")
+opinions_csv <- read.csv("./data/Abortion Knowledge and Attitudes Poll.csv")
 
 # Filter data: we want to summarize the count for our 4 main questions
 #   for each state and remove unnecessary columns
