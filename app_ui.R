@@ -1,13 +1,15 @@
 # Load libraries so they are available
 library("shiny")
 library("plotly")
+library("ggplot2")
+library("tidyverse")
 
 
 # Introduction
 
 intro_content <- mainPanel( 
-  p(h4("Kayla Gibbs (kgibbs27@uw.edu), Kristy Nhan (kristynh@uw.edu), Elizabeth Luna-Santos (elunas1@uw.edu)")),
-  p(h4("Fall 2022 INFO 201 Project")),
+  p(h4("Kayla Gibbs, Kristy Nhan, Elizabeth Luna-Santos")),
+  p(h4("Autumn 2022 INFO 201 Project")),
   p(tags$br()),
   p(strong(h3("Introduction"))),
   p("This project is focused on analyzing abortion trends, specifically in 
@@ -21,10 +23,10 @@ intro_content <- mainPanel(
     ability to get abortion is often limited based on the weeks of gestation 
     where it might be too early to test for the hCG hormone."), 
   p("Our group sought to research the following questions::"),
-  tags$li("How has legalizing and prohibiting abortions in the United States 
-          affected public opinion on abortions in California?"),
-  tags$li("How has the funding for abortions changed over the last three years 
-          in California?"),
+  tags$li("ow has legalizing and prohibiting abortions in the United States 
+          affected public opinion on abortions?"),
+  tags$li("How has funding for abortions impacted abortion-related services in 
+          California?"),
   tags$li("What are some financial roadblocks that impact the accessibility 
           of abortion in California, and what are people doing to get around 
           them?"),
@@ -56,69 +58,80 @@ intro_panel <- tabPanel(
 # Define a variable `sidebar_content` as a `sidebarPanel()` UI element
 # containing the following information:
 
-sidebar_content <- sidebarPanel(
-  # A `sliderInput()` for the 'percentile' value, labeled "Income Percentile".
-  # This slider should let the user pick a range between 0 and 100
-  sliderInput(
-    inputId = "percentile",
-    label = "Income Percentile", min = 0, max = 100, value = c(0, 100)
-  )
-)
+# sidebar_content <- sidebarPanel(
+#   # A `sliderInput()` for the 'percentile' value, labeled "Income Percentile".
+#   # This slider should let the user pick a range between 0 and 100
+#   sliderInput(
+#     inputId = "percentile",
+#     label = "Income Percentile", min = 0, max = 100, value = c(0, 100)
+#   )
+# )
 
 # Define a variable `main_content` as a `mainPanel()` UI element
 # containing the following information:
-main_content <- mainPanel(
-  # A `plotOutput()` element showing the 'plot' output (defined in the server)
-  plotOutput("plot"),
-  
-  # A paragraph with a hyperlink to the data source
-  # http://gabriel-zucman.eu/usdina/
-  p(
-    "Source:",
-    a(
-      href = "http://gabriel-zucman.eu/usdina/",
-      "http://gabriel-zucman.eu/usdina/"
-    )
-  )
-)
+# main_content <- mainPanel(
+#   # A `plotOutput()` element showing the 'plot' output (defined in the server)
+#   plotOutput("plot"),
+#   
+#   # A paragraph with a hyperlink to the data source
+#   # http://gabriel-zucman.eu/usdina/
+#   p(
+#     "Source:",
+#     a(
+#       href = "http://gabriel-zucman.eu/usdina/",
+#       "http://gabriel-zucman.eu/usdina/"
+#     )
+#   )
+# )
 
 
 # Define a variable `growth_panel` for your second page. It should be a
 # `tabPanel()` with a title "Growth Chart" to represent the second tab.
 # This layout will contain the following elements:
-growth_panel <- tabPanel(
-  "Growth Chart",
-  
-  # A `titlePanel()` with the text "Income growth 1980-2014"
-  titlePanel("Income growth 1980-2014"),
-  
-  # A `sidebarLayout()` to create two columns.
-  # The sidebar layout will contain elements:
-  sidebarLayout(
-    # Your `sidebar_content`
-    sidebar_content,
-    
-    # Your `main_content`
-    main_content
-  )
+# growth_panel <- tabPanel(
+#   "Growth Chart",
+#   
+#   # A `titlePanel()` with the text "Income growth 1980-2014"
+#   titlePanel("Income growth 1980-2014"),
+#   
+#   # A `sidebarLayout()` to create two columns.
+#   # The sidebar layout will contain elements:
+#   sidebarLayout(
+#     # Your `sidebar_content`
+#     sidebar_content,
+#     
+#     # Your `main_content`
+#     main_content
+#   )
+# )
+
+chart1_main_content <- mainPanel(
+  class = "display-question",
+  selectInput(
+    "question",
+    label = "Select a public opinion question to display:",
+    choices = list(
+      "Do you think abortion should be legal or illegal in cases of rape or incest?" = "q11a",
+      "Do you think abortion should be legal or illegal if the patient's life is endangered?" = "q11b",
+      "Do you think abortion should be legal or illegal if the fetus is not suspected to survive?" = "q11c",
+      "Do you think abortion should be legal or illegal if the fetus is expected to have serious birth defects?" = "q11d",
+      "Do you think abortion should be legal or illegal for women who do not wish to be pregnant?" = "q11e"
+    )
+  ),
+  plotOutput("plot"),
+  p(em("Source: Henry J. Kaiser Family Foundation for Roper Center at Cornell 
+       University\nThese graphs display the percentage of people surveyed in 
+       each state who think that abortion should be legalized in the context 
+       of the selected question. Survey participants were allowed to skip 
+       questions as they liked, so some states may show 0, which means that 
+       data was not recorded for that particular U.S. state."),
+    align = "center", style = "font-size:12px;")
 )
 
 public_opinion_panel <- tabPanel(
-  class = "inner-content",
-  "Public Opinion",
-  
-  # A `titlePanel()` with the text "Income growth 1980-2014"
-  titlePanel("Californians' Public Opinions on Abortion"),
-  
-  # A `sidebarLayout()` to create two columns.
-  # The sidebar layout will contain elements:
-  sidebarLayout(
-    # Your `sidebar_content`
-    sidebar_content,
-    
-    # Your `main_content`
-    main_content
-  )
+  "Public Opinions",
+  titlePanel("Public Opinions on Abortion"),
+  chart1_main_content
 )
 
 funding_panel <- tabPanel(
@@ -130,13 +143,13 @@ funding_panel <- tabPanel(
   
   # A `sidebarLayout()` to create two columns.
   # The sidebar layout will contain elements:
-  sidebarLayout(
-    # Your `sidebar_content`
-    sidebar_content,
-    
-    # Your `main_content`
-    main_content
-  )
+  # sidebarLayout(
+  #   # Your `sidebar_content`
+  #   sidebar_content,
+  #   
+  #   # Your `main_content`
+  #   main_content
+  # )
 )
 
 driving_access_panel <- tabPanel(
@@ -148,13 +161,13 @@ driving_access_panel <- tabPanel(
   
   # A `sidebarLayout()` to create two columns.
   # The sidebar layout will contain elements:
-  sidebarLayout(
-    # Your `sidebar_content`
-    sidebar_content,
-    
-    # Your `main_content`
-    main_content
-  )
+  # sidebarLayout(
+  #   # Your `sidebar_content`
+  #   sidebar_content,
+  #   
+  #   # Your `main_content`
+  #   main_content
+  # )
 )
 
 summary_content <- mainPanel(
@@ -203,12 +216,7 @@ summary_content <- mainPanel(
 summary_panel <- tabPanel(
   class = "inner-content",
   "Summary",
-  
-  # A `titlePanel()` with the text "Income growth 1980-2014"
   titlePanel("Summary"),
-  
-  # A `sidebarLayout()` to create two columns.
-  # The sidebar layout will contain elements:
   summary_content
 )
 
@@ -222,6 +230,18 @@ report_panel <- tabPanel(
   report_insert
 )
 
+
+# Include motivation
+
+motivation_insert <- mainPanel(
+  includeMarkdown("docs/p01-proposal.md")
+)
+
+motivation_panel <- tabPanel(
+  "Motivation",
+  motivation_insert
+)
+
 # Finally, define a `ui` variable, assigning it a `navbarPage()` layout.
 # You will use `shinyUI()` to render this variable (in `app.R`)
 # Give the layout a title of "Income Inequality".
@@ -229,25 +249,17 @@ report_panel <- tabPanel(
 # - Your `intro_panel`
 # - Your `growth_panel`
 
-# ui <- navbarPage(
-#   "An Analysis of Abortion Trends in California",
-#   theme = shinythemes::shinytheme("readable"),
-#   intro_panel,
-#   public_opinion_panel,
-#   funding_panel,
-#   driving_access_panel,
-#   summary_panel
-# )
 ui <- fluidPage(
   navbarPage(
     "An Analysis of Abortion Trends",
-    # theme = shinythemes::shinytheme("minty"),
+    theme = shinythemes::shinytheme("readable"),
     intro_panel,
     public_opinion_panel, 
     funding_panel,
     driving_access_panel, 
     summary_panel,
-    report_panel
+    report_panel, 
+    motivation_panel
   ),
   includeCSS("styles.css")
 )
